@@ -2,37 +2,51 @@
 #$ -cwd 
 
 
-#outputs concatenated vardict file for now, hopefully vcf soon
+##########################################################################
+# Allysia Mak                                                            #
+# platypus.sh runs Opposum for read preprocessing before running         #
+# Platypus on all bams in the 'parentdir'                                #
+#                                                                        #
+# The number of bams run in parallel is specified by 'numProcesses'      #
+##########################################################################
 
-parentdir=$1 #"/scratch/jakutagawa/RNA-seq/tumor_bams/reindex/"
+
+parentdir="/scratch/jakutagawa/RNA-seq/tumor_bams/tcga-bams" #/reindex/
+hs37="/pod/pstore/groups/brookslab/reference_indices/hs37/hs37d5.fa"
 hg19="/pod/pstore/groups/brookslab/reference_indices/hg19/hg19.fa"
-cdnahg19="/pod/pstore/groups/brookslab/reference_indices/hg19/cdna/Homo_sapiens.GRCh37.75.cdna.all.fa"
-splitbeds="/scratch/amak/varCalls/VarDict/wg-beds"
-outDir="/scratch/amak/varCalls/VarDict/round-one-results"
-bedList=()
-for bed in $(ls $splitbeds); do 
+outDir="/scratch/amak/varCalls/Platypus/round-one-results"
+opossum="/pod/pstore/groups/brookslab/amak/packages/Opossum/Opossum.py"
+platypus="/pod/pstore/groups/brookslab/amak/packages/.py"
+numProcesses=4
 
-    bedList+=($bed)
-done
-echo ${bedList[@]}
 
-for bam in $(find $parentdir -mindepth 1 -name '*sorted.bam'); do
+function maxProcesses {
+    # Waits until there are less than 'numProcesses' jobs running before starting a new job
+    while [ 'jobs | wc -l' -ge $numProcesses]; do
+	sleep 5
+    done
+}
+
+for bam in $(find $parentdir -mindepth 1 -name '*.bam'); do
     uid=$(basename $bam)
 
-    mkdir $outDir/$uid
-#    cd $outDir/$uid
-    echo "VarDict running on " $uid
-    for bed in ${bedList[@]}; do
-#	echo $bed
+#    mkdir $outDir/$uid
+    echo "Opossum running on " $uid
+    if [[ $uid == *"STAR*"* ]]; then
+	maxProcesses; nice time python opossum --BamFile=$bam --SoftClipsExist=True --OutFile=$parentdir'/'$uid'.opossum.bam' &
+    else
+	maxProcesses; nice time python opossum --BamFile=$bam --SoftClipsExist=False --OutFile=$parentdir'/'$uid'.opossum.bam' &
+    fi
+
+    echo "Platypus running on " $uid
+
+    maxProcesses; nice time platypus --callVariants --bamFiles $bam --refFile $hs37 --filterDuplicates 0 --minMapQual 0 --minFlank 0 --maxReadLength 500 --minGoodQualBases 10 --minBaseQual 20 -o $outDir'/'$uid'.vcf' &
 	
-	nice time vardict -D -G $hg19 -f 0.01 -N $uid -b $bam -c 1 -S 2 -E 3 $splitbeds/$bed >> $outDir/$uid/$uid".out" &
-	wait 
-    done
+
+#   rm $parentdir'/'$uid'.opossum.bam'
+
     echo $uid " complete"
-#    cat $outDir/$uid/* > $outDir/$uid/
+
+
 done
-
-
-#time /scratch/amak/packages/VarDictJava/VarDict/vardict -D -G /pod/pstore/groups/brookslab/reference_indices/hg19/hg19.fa -f 0.01 -N PCAWG.ba92c434-3604-4b85-bc76-3bbe5c44253f.TopHat2.v1.chr.sorted -b /scratch/jakutagawa/RNA-seq/tumor_bams/reindex/c1b68b54-0258-470b-b6e2-b3f558bb1293/PCAWG.ba92c434-3604-4b85-bc76-3bbe5c44253f.TopHat2.v1.chr.sorted -c 1 -S 2 -E 3 /scratch/jakutagawa/RNA-seq/tumor_bams/reindex/hg19_5k_150bpOL_seg.txt.2 | /scratch/amak/packages/VarDictJava/VarDict/teststrandbias.R | /scratch/amak/packages/VarDictJava/VarDict/var2vcf_valid.pl -N PCAWG.ba92c434-3604-4b85-bc76-3bbe5c44253f.TopHat2.v1.chr.sorted -E -f 0.01 > /scratch/amak/varCalls/VarDictJava/c1b68b54-0258-470b-b6e2-b3f558bb1293/PCAWG.ba92c434-3604-4b85-bc76-3bbe5c44253f.TopHat2.v1.chr.sorted.2.vcf &
-
-
+wait
