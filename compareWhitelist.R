@@ -51,12 +51,12 @@ numFiltMQ50 <- dim(somaticMinusEdits)[1] - dim(somaticMQ50)[1]
 # V3 is start position, V6 variant location, V7 variant type (SNP), V17 is probably VAF?, V42 cancer
 
 foundInMaf <- somaticMinusEdits %>% semi_join(whitelist, by=c("V2"="Chr", "V3"="Start"))
-
 correctClass <- somaticMinusEdits %>% semi_join(whitelist, by=c("V2"="Chr", "V3"="Start", "V7"="Variant"))
 
 totalMaf <- dim(whitelist)[1]
 numInMaf <- dim(foundInMaf)[1]
 sensitivity <- numInMaf / (numInMaf + totalMaf)
+
 
 numCorrectClass <- dim(correctClass)[1]
 

@@ -4,11 +4,13 @@
 
 #outputs concatenated vardict file for now, hopefully vcf soon
 
-parentdir=$1 #"/scratch/jakutagawa/RNA-seq/tumor_bams/reindex/"
+#parentdir=$1 #"/scratch/jakutagawa/RNA-seq/tumor_bams/reindex/"
+parentdir="/scratch/jakutagawa/RNA-seq/realigned_bams/tumor"
 hg19="/pod/pstore/groups/brookslab/reference_indices/hg19/hg19.fa"
+hs37="/pod/pstore/groups/brookslab/reference_indices/hs37/hs37d5.fa"
 cdnahg19="/pod/pstore/groups/brookslab/reference_indices/hg19/cdna/Homo_sapiens.GRCh37.75.cdna.all.fa"
 splitbeds="/scratch/amak/varCalls/VarDict/wg-beds"
-outDir="/scratch/amak/varCalls/VarDict/round-one-results"
+outDir="/scratch/amak/varCalls/VarDict/tumor-vcfs"
 bedList=()
 for bed in $(ls $splitbeds); do 
 
@@ -16,7 +18,7 @@ for bed in $(ls $splitbeds); do
 done
 echo ${bedList[@]}
 
-for bam in $(find $parentdir -mindepth 1 -name '*sorted.bam'); do
+for bam in $(find $parentdir -mindepth 1 -name '*hs37.bam'); do
     uid=$(basename $bam)
 
     mkdir $outDir/$uid
@@ -25,7 +27,7 @@ for bam in $(find $parentdir -mindepth 1 -name '*sorted.bam'); do
     for bed in ${bedList[@]}; do
 #	echo $bed
 	
-	nice time vardict -D -G $hg19 -f 0.01 -N $uid -b $bam -c 1 -S 2 -E 3 $splitbeds/$bed >> $outDir/$uid/$uid".out" &
+	nice time vardict -D -G $hs37 -f 0.01 -N $uid -b $bam -c 1 -S 2 -E 3 $splitbeds/$bed >> $outDir/$uid/$uid".out" &
 	wait 
     done
     echo $uid " complete"
