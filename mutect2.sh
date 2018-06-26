@@ -15,20 +15,24 @@ normaldir="/scratch/jakutagawa/RNA-seq/realigned_bams/normal"
 hs37="/pod/pstore/groups/brookslab/reference_indices/hs37/hs37d5.fa"
 hg19="/pod/pstore/groups/brookslab/reference_indices/hg19/hg19.fa"
 outDir="/scratch/amak/varCalls/Mutect/normal-vcfs"
-numProcesses=2
+numProcesses=$1
+if [ $numProcesses -eq 0 ]; then
+    echo "Max number of processes not supplied. Defaulting to 4"
+    numProcesses=4
+fi
 
 
 function maxProcesses {
     # Waits until there are less than 'numProcesses' jobs running before starting a new job
 
-    while [ $(jobs | wc -l) -ge 2 ]; do
+    while [ $(jobs | wc -l) -ge $numProcesses ]; do
 	echo 'waiting'
 	sleep 5
 
     done
 }
 
-for bam in $(find $normaldir -mindepth 1 -name '*hs37d.bam'); do
+for bam in $(find $normaldir -mindepth 1 -name '*hs37d5.bam'); do
     uid=$(basename $bam)
     IFS='.'
     set $uid

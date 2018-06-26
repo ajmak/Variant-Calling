@@ -2,26 +2,20 @@
 #$ -cwd 
 
 
-#outputs concatenated vardict file for now and corresponding vcf
-## normals for gtex:
-parentdir="/scratch/jakutagawa/RNA-seq/GTEx_bams/STAR_aligned"
-#parentdir="/scratch/jakutagawa/RNA-seq/realigned_bams/tumor" 
-#parentdir="/scratch/jakutagawa/RNA-seq/realigned_bams/normal"
+#outputs concatenated vardict file for now, hopefully vcf soon
+
+#parentdir=$1 #"/scratch/jakutagawa/RNA-seq/tumor_bams/reindex/"
+parentdir="/scratch/jakutagawa/RNA-seq/realigned_bams/normal"
 hg19="/pod/pstore/groups/brookslab/reference_indices/hg19/hg19.fa"
 hs37="/pod/pstore/groups/brookslab/reference_indices/hs37/hs37d5.fa"
 cdnahg19="/pod/pstore/groups/brookslab/reference_indices/hg19/cdna/Homo_sapiens.GRCh37.75.cdna.all.fa"
 splitbeds="/scratch/amak/varCalls/VarDict/wg-beds"
-outDir="/scratch/amak/varCalls/VarDict/gtex_normals"
+outDir="/scratch/amak/varCalls/VarDict/normal-vcfs"
 bedList=()
-maxProcesses=$1
-if [ $maxProcesses -eq 0 ]; then
-    echo "Max number of processes not supplied. Defaulting to 4"
-    maxProcesses=4
-fi
 
 function maxJobs {
     # Waits until there are less than 'numJobs' jobs running before starting a new job        
-    while [ $(jobs | wc -l) -ge $maxProcesses ]; do
+    while [ $(jobs | wc -l) -ge 8 ]; do
         echo 'waiting'
         sleep 5
     done
@@ -34,24 +28,20 @@ for bed in $(ls $splitbeds); do
 done
 echo ${bedList[@]}
 
-for bam in $(find $parentdir -mindepth 1 -name '*hs37d5.bam'); do
-    file=$(basename $bam)
-    IFS='.'
-    set $file
-    uid=$(echo $1)
-    IFS=''
-    mkdir $outDir/$uid
+for bam in $(find $parentdir -mindepth 1 -name '*hs37d.bam'); do
+    uid=$(basename $bam)
 
+    mkdir $outDir/$uid
+#    cd $outDir/$uid
     echo "VarDict running on " $uid
     for bed in ${bedList[@]}; do
-	echo $bed
-
-	maxJobs; nice time vardict -D -G $hs37 -f 0.01 -N $uid -b $bam -c 1 -S 2 -E 3 $splitbeds/$bed >> $outDir/$uid/$uid".out" && echo "" >> $outDir/$uid/$uid".out" &
-
+#	echo $bed
+	
+	maxJobs; nice time vardict -D -G $hs37 -f 0.01 -N $uid -b $bam -c 1 -S 2 -E 3 $splitbeds/$bed >> $outDir/$uid/$uid".out" &
 
     done
     
-    python vardict2vcf.py $outDir/$uid/$uid".out" > $outDir/$uid/$uid".log"
+    python vardict2vcf.py $outDir/$uid/$uid".out" > $outDir/$uid/$uid".vcf"
     echo $uid " complete"
 #    cat $outDir/$uid/* > $outDir/$uid/
 done

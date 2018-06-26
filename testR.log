@@ -1,0 +1,1082 @@
+[1] "DO695"
+[1] "tumor"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO695.tumor.tmp"
+[1] "normal"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO695.normal.tmp"
+[1] "tumor VCF VarDict"
+     V1        V2 V3 V4 V5    V6   V7    VAF TC VC
+1 chr16  10999991  .  G  C 255.0 None 1.0000  2  2
+2 chr16  11002904  .  G  A 255.0 None 1.0000 15 15
+3 chr16  11002927  .  A  G 255.0 None 1.0000 21 21
+4  chr3 156241949  .  T  C 255.0 None 0.5000 10  5
+5  chr3 156241965  .  A  G 255.0 None 0.2222  9  2
+6  chr3 156242091  .  G  A 255.0 None 0.7500  4  3
+    V1        V2 V3 V4 V5  V6   V7    VAF TC VC
+1 chr3 156241949  .  T  C 255 None 0.2500  8  2
+2 chr3 156241965  .  A  G 255 None 0.6667  9  6
+3 chr3 156242091  .  G  A 255 None 0.6000 10  6
+4 chr3 156242473  .  T  C 255 None 0.7500  4  3
+5 chr3 156242801  .  G  A 255 None 0.5000  4  2
+6 chr3 156243963  .  A  G 255 None 1.0000  2  2
+   Chr     Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chr3 156241949  .   T   C     255   None 0.2500              8            2
+2 chr3 156241965  .   A   G     255   None 0.6667              9            6
+3 chr3 156242091  .   G   A     255   None 0.6000             10            6
+4 chr3 156242473  .   T   C     255   None 0.7500              4            3
+5 chr3 156242801  .   G   A     255   None 0.5000              4            2
+6 chr3 156243963  .   A   G     255   None 1.0000              2            2
+[1] 54884
+    Chr     Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chr16  10999991  .   G   C   255.0   None 1.0000              2            2
+2 chr16  11002904  .   G   A   255.0   None 1.0000             15           15
+3 chr16  11002927  .   A   G   255.0   None 1.0000             21           21
+4  chr3 156242573  .   C   A   255.0   None 1.0000              2            2
+5  chr3 156242649  .   A   C   255.0   None 0.8333              6            5
+6  chr3 156243617  .   A   G   255.0   None 0.5000              4            2
+[1] 19559
+[1] "somaticMinusEdits:"
+[1] 140602     10
+[1] 156  10
+# A tibble: 11 x 2
+   V6                count
+ * <chr>             <int>
+ 1 3'UTR                31
+ 2 5'Flank               8
+ 3 5'UTR                 7
+ 4 IGR                   9
+ 5 Intron               23
+ 6 lincRNA               1
+ 7 Missense_Mutation    42
+ 8 Nonsense_Mutation     7
+ 9 RNA                   1
+10 Silent               17
+11 Splice_Site           1
+                                               V6 count
+3'UTR                                       3'UTR    36
+5'Flank                                   5'Flank   194
+5'UTR                                       5'UTR    16
+De_novo_Start_OutOfFrame De_novo_Start_OutOfFrame     1
+Frame_Shift_Del                   Frame_Shift_Del     2
+Frame_Shift_Ins                   Frame_Shift_Ins     5
+IGR                                           IGR  4349
+In_Frame_Del                         In_Frame_Del     1
+Intron                                     Intron  3631
+lincRNA                                   lincRNA   616
+Missense_Mutation               Missense_Mutation    35
+Nonsense_Mutation               Nonsense_Mutation     6
+RNA                                           RNA   334
+Silent                                     Silent    13
+Splice_Site                           Splice_Site     2
+Start_Codon_SNP                   Start_Codon_SNP     1
+[1] "numInMaf"
+[1] 156
+[1] "totalMAF"
+[1] 1262
+[1] "sensitivity"
+[1] 0.1100141
+[1] "Donor ID"
+[1] NA
+[1] "Sensitivity"
+[1] NA
+[1] "3'UTR"
+[1] 0.4626866
+[1] "5'UTR"
+[1] 0.3043478
+[1] "RNA"
+[1] 0.002985075
+[1] "lincRNA"
+[1] 0.001620746
+[1] "Silent"
+[1] 0.5666667
+[1] "Splice_Site"
+[1] 0.3333333
+[1] "De_novo_Start_InFrame"
+[1] NA
+[1] "De_novo_Start_OutOfFrame"
+[1] NA
+[1] "Missense_Mutation"
+[1] 0.5454545
+[1] "Nonsense_Mutation"
+[1] 0.5384615
+[1] "Nonstop_Mutation"
+[1] NA
+[1] "In_Frame_Del"
+[1] NA
+[1] "In_Frame_Ins"
+[1] NA
+[1] "Frame_Shift_Del"
+[1] NA
+[1] "Frame_Shift_Ins"
+[1] NA
+[1] "Start_Codon_Del"
+[1] NA
+[1] "Start_Codon_Ins"
+[1] NA
+[1] "Start_Codon_SNP"
+[1] NA
+[1] "Stop_Codon_Del"
+[1] NA
+[1] "Stop_Codon_Ins"
+[1] NA
+[1] "5'Flank"
+[1] 0.03960396
+[1] "Intron"
+[1] 0.006294472
+[1] "IGR"
+[1] 0.002065168
+[1] "foundMaf"
+      V1   V2       V3       V4 V5                V6  V7 V8 V9 V10   V17    V29
+1 VPS13D chr1 12422812 12422812  + Missense_Mutation SNP  A  A   T 0.428 0.2778
+2  SZRD1 chr1 16721628 16721628  + Missense_Mutation SNP  G  G   A 0.582 0.3939
+3  CROCC chr1 17272032 17272032  +            Silent SNP  G  G   C 0.642 0.1395
+4   UBR4 chr1 19441918 19441918  +            Silent SNP  C  C   T 0.517 0.3929
+5 EIF4G3 chr1 21502681 21502681  +             5'UTR SNP  G  G   C 0.746 0.3684
+6   PPIE chr1 40214727 40214727  + Missense_Mutation SNP  G  G   A 0.557 0.2778
+          V42   V43
+1 Bladder-TCC DO695
+2 Bladder-TCC DO695
+3 Bladder-TCC DO695
+4 Bladder-TCC DO695
+5 Bladder-TCC DO695
+6 Bladder-TCC DO695
+[1] "sensFPKM"
+   bin total found
+1   -6     1    NA
+2   -5     1    NA
+3   -4     3     1
+4 -3.5   341    NA
+5   -3   170    NA
+6 -2.5   136    NA
+  V2       V3       V4     V1    V29 V5
+1  1 12422812 12422813 VPS13D 0.2778  +
+2  1 16721628 16721629  SZRD1 0.3939  +
+3  1 17272032 17272033  CROCC 0.1395  +
+4  1 19441918 19441919   UBR4 0.3929  +
+5  1 21502681 21502682 EIF4G3 0.3684  +
+6  1 40214727 40214728   PPIE 0.2778  +
+[1] "foundBedFile"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO695.found.bed"
+[1] "DO2503"
+[1] "tumor"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO2503.tumor.tmp"
+[1] "normal"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO2503.normal.tmp"
+[1] "tumor VCF VarDict"
+     V1        V2 V3 V4 V5    V6   V7    VAF TC VC
+1 chr16  11002626  .  G  A 255.0 None 1.0000  2  2
+2 chr16  11002904  .  G  A 255.0 None 1.0000 25 25
+3 chr16  11002927  .  A  G 255.0 None 1.0000 23 23
+4  chr3 156241949  .  T  C 255.0 None 0.1765 17  3
+5  chr3 156241965  .  A  G 255.0 None 0.5556 18 10
+6  chr3 156242091  .  G  A 255.0 None 0.5000 12  6
+     V1        V2 V3 V4 V5  V6   V7    VAF TC VC
+1 chr16  11000756  .  C  T 255 None 0.1429 14  2
+2 chr16  11002904  .  G  A 255 None 1.0000 11 11
+3 chr16  11002927  .  A  G 255 None 1.0000 14 14
+4  chr3 156241949  .  T  C 255 None 0.3333 33 11
+5  chr3 156241965  .  A  G 255 None 0.6500 40 26
+6  chr3 156242091  .  G  A 255 None 0.7188 32 23
+    Chr     Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chr16  11000756  .   C   T     255   None 0.1429             14            2
+2 chr16  11002904  .   G   A     255   None 1.0000             11           11
+3 chr16  11002927  .   A   G     255   None 1.0000             14           14
+4  chr3 156241949  .   T   C     255   None 0.3333             33           11
+5  chr3 156241965  .   A   G     255   None 0.6500             40           26
+6  chr3 156242091  .   G   A     255   None 0.7188             32           23
+[1] 122564
+    Chr    Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chr16 11002626  .   G   A   255.0   None 1.0000              2            2
+2 chr19 41245298  .   A   G   255.0   None 0.0408             49            2
+3 chr19 41246257  .   A   T   255.0   None 0.0183            109            2
+4 chr19 41246359  .   G   A   255.0   None 0.0220             91            2
+5 chr19 41246424  .   T   C   255.0   None 0.0588             51            3
+6 chr19 41247311  .   G   T   255.0   None 0.0612             49            3
+[1] 19308
+[1] "somaticMinusEdits:"
+[1] 128330     10
+[1] 17 10
+# A tibble: 6 x 2
+  V6                count
+* <chr>             <int>
+1 3'UTR                 2
+2 5'Flank               1
+3 IGR                   1
+4 Intron                5
+5 Missense_Mutation     7
+6 Start_Codon_SNP       1
+                                 V6 count
+3'UTR                         3'UTR     4
+5'Flank                     5'Flank    23
+Frame_Shift_Del     Frame_Shift_Del     2
+Frame_Shift_Ins     Frame_Shift_Ins     1
+IGR                             IGR   649
+Intron                       Intron   512
+lincRNA                     lincRNA    82
+Missense_Mutation Missense_Mutation     5
+RNA                             RNA    51
+Silent                       Silent     1
+[1] "numInMaf"
+[1] 17
+[1] "totalMAF"
+[1] 169
+[1] "sensitivity"
+[1] 0.09139785
+[1] "Donor ID"
+[1] NA
+[1] "Sensitivity"
+[1] NA
+[1] "3'UTR"
+[1] 0.3333333
+[1] "5'UTR"
+[1] NA
+[1] "RNA"
+[1] NA
+[1] "lincRNA"
+[1] NA
+[1] "Silent"
+[1] NA
+[1] "Splice_Site"
+[1] NA
+[1] "De_novo_Start_InFrame"
+[1] NA
+[1] "De_novo_Start_OutOfFrame"
+[1] NA
+[1] "Missense_Mutation"
+[1] 0.5833333
+[1] "Nonsense_Mutation"
+[1] NA
+[1] "Nonstop_Mutation"
+[1] NA
+[1] "In_Frame_Del"
+[1] NA
+[1] "In_Frame_Ins"
+[1] NA
+[1] "Frame_Shift_Del"
+[1] NA
+[1] "Frame_Shift_Ins"
+[1] NA
+[1] "Start_Codon_Del"
+[1] NA
+[1] "Start_Codon_Ins"
+[1] NA
+[1] "Start_Codon_SNP"
+[1] NA
+[1] "Stop_Codon_Del"
+[1] NA
+[1] "Stop_Codon_Ins"
+[1] NA
+[1] "5'Flank"
+[1] 0.04166667
+[1] "Intron"
+[1] 0.00967118
+[1] "IGR"
+[1] 0.001538462
+[1] "foundMaf"
+      V1    V2        V3        V4 V5                V6  V7 V8 V9 V10   V17
+1  IGSF9  chr1 159897990 159897990  + Missense_Mutation SNP  T  T   C 0.667
+2  RPAP3 chr12  48091472  48091472  + Missense_Mutation SNP  C  C   A 0.353
+3   CBFB chr16  67063313  67063313  +   Start_Codon_SNP SNP  G  G   A 0.726
+4 RNF167 chr17   4848490   4848490  +             3'UTR SNP  C  C   T 0.483
+5  NOL10  chr2  10729809  10729809  + Missense_Mutation SNP  A  A   T 0.343
+6   MTA3  chr2  42909567  42909567  + Missense_Mutation SNP  A  A   C 0.373
+     V29            V42    V43
+1 0.0857 Breast-AdenoCa DO2503
+2    0.3 Breast-AdenoCa DO2503
+3 0.3333 Breast-AdenoCa DO2503
+4    0.2 Breast-AdenoCa DO2503
+5 0.1833 Breast-AdenoCa DO2503
+6  0.322 Breast-AdenoCa DO2503
+[1] "sensFPKM"
+   bin total found
+1 -3.5    78     1
+2   -3     5    NA
+3 -2.5     8     1
+4   -2     4    NA
+5 -1.5     4    NA
+6   -1     2    NA
+  V2        V3        V4     V1    V29 V5
+1  1 159897990 159897991  IGSF9 0.0857  +
+2 12  48091472  48091473  RPAP3    0.3  +
+3 16  67063313  67063314   CBFB 0.3333  +
+4 17   4848490   4848491 RNF167    0.2  +
+5  2  10729809  10729810  NOL10 0.1833  +
+6  2  42909567  42909568   MTA3  0.322  +
+[1] "foundBedFile"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO2503.found.bed"
+[1] "DO561"
+[1] "tumor"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO561.tumor.tmp"
+[1] "normal"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO561.normal.tmp"
+[1] "tumor VCF VarDict"
+     V1       V2 V3 V4 V5    V6   V7    VAF TC VC
+1 chr16 77260651  .  T  C 255.0 None 1.0000  2  2
+2 chr16 77261490  .  G  C 255.0 None 1.0000  2  2
+3 chr16 11002904  .  G  A 255.0 None 1.0000  2  2
+4 chr16 11002927  .  A  G 255.0 None 1.0000  2  2
+5 chr22 26776795  .  G  T 255.0 None 0.1000 20  2
+6 chr22 26777025  .  A  G 255.0 None 1.0000 10 10
+     V1        V2 V3 V4 V5    V6   V7    VAF TC VC
+1  chrX 123586083  . AA GG 255.0 None 1.0000  2  2
+2 chr16  11001680  .  G  T 255.0 None 1.0000  4  4
+3 chr16  11002904  .  G  A 229.8 None 1.0000 10 10
+4 chr16  11002927  .  A  G 223.5 None 1.0000  8  8
+5  chr3 156241949  .  T  C 255.0 None 1.0000  2  2
+6  chr3 156243113  .  T  C 255.0 None 1.0000  2  2
+    Chr     Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1  chrX 123586083  .  AA  GG   255.0   None 1.0000              2            2
+2 chr16  11001680  .   G   T   255.0   None 1.0000              4            4
+3 chr16  11002904  .   G   A   229.8   None 1.0000             10           10
+4 chr16  11002927  .   A   G   223.5   None 1.0000              8            8
+5  chr3 156241949  .   T   C   255.0   None 1.0000              2            2
+6  chr3 156243113  .   T   C   255.0   None 1.0000              2            2
+[1] 73516
+    Chr    Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chr16 77260651  .   T   C   255.0   None 1.0000              2            2
+2 chr16 77261490  .   G   C   255.0   None 1.0000              2            2
+3 chr22 26776795  .   G   T   255.0   None 0.1000             20            2
+4 chr22 26777025  .   A   G   255.0   None 1.0000             10           10
+5 chr22 26777440  .   G   A   255.0   None 0.9688             32           31
+6 chr22 26777795  .   A   T   248.2   None 0.9737             38           37
+[1] 29177
+[1] "somaticMinusEdits:"
+[1] 202793     10
+[1] 510  10
+# A tibble: 12 x 2
+   V6                       count
+ * <chr>                    <int>
+ 1 3'UTR                       70
+ 2 5'Flank                     30
+ 3 5'UTR                       22
+ 4 De_novo_Start_OutOfFrame     1
+ 5 IGR                         89
+ 6 Intron                     126
+ 7 lincRNA                     19
+ 8 Missense_Mutation           70
+ 9 Nonsense_Mutation            5
+10 RNA                         16
+11 Silent                      44
+12 Splice_Site                  3
+                                               V6 count
+3'UTR                                       3'UTR    71
+5'Flank                                   5'Flank   353
+5'UTR                                       5'UTR    33
+De_novo_Start_InFrame       De_novo_Start_InFrame     1
+De_novo_Start_OutOfFrame De_novo_Start_OutOfFrame     2
+Frame_Shift_Ins                   Frame_Shift_Ins     3
+IGR                                           IGR  9830
+Intron                                     Intron  7501
+lincRNA                                   lincRNA  1460
+Missense_Mutation               Missense_Mutation    85
+Nonsense_Mutation               Nonsense_Mutation     7
+RNA                                           RNA   788
+Silent                                     Silent    32
+Splice_Site                           Splice_Site     8
+[1] "numInMaf"
+[1] 510
+[1] "totalMAF"
+[1] 2843
+[1] "sensitivity"
+[1] 0.1521026
+[1] "Donor ID"
+[1] NA
+[1] "Sensitivity"
+[1] NA
+[1] "3'UTR"
+[1] 0.4964539
+[1] "5'UTR"
+[1] 0.4
+[1] "RNA"
+[1] 0.0199005
+[1] "lincRNA"
+[1] 0.01284652
+[1] "Silent"
+[1] 0.5789474
+[1] "Splice_Site"
+[1] 0.2727273
+[1] "De_novo_Start_InFrame"
+[1] NA
+[1] "De_novo_Start_OutOfFrame"
+[1] 0.3333333
+[1] "Missense_Mutation"
+[1] 0.4516129
+[1] "Nonsense_Mutation"
+[1] 0.4166667
+[1] "Nonstop_Mutation"
+[1] NA
+[1] "In_Frame_Del"
+[1] NA
+[1] "In_Frame_Ins"
+[1] NA
+[1] "Frame_Shift_Del"
+[1] NA
+[1] "Frame_Shift_Ins"
+[1] NA
+[1] "Start_Codon_Del"
+[1] NA
+[1] "Start_Codon_Ins"
+[1] NA
+[1] "Start_Codon_SNP"
+[1] NA
+[1] "Stop_Codon_Del"
+[1] NA
+[1] "Stop_Codon_Ins"
+[1] NA
+[1] "5'Flank"
+[1] 0.07832898
+[1] "Intron"
+[1] 0.01652026
+[1] "IGR"
+[1] 0.008972679
+[1] "foundMaf"
+        V1   V2       V3       V4 V5                V6  V7 V8 V9 V10   V17
+1 C1orf159 chr1  1019573  1019573  + Missense_Mutation SNP  C  C   T 0.657
+2    MMEL1 chr1  2523049  2523049  +            Silent SNP  G  G   A 0.637
+3   KLHL21 chr1  6650897  6650897  +             3'UTR SNP  G  G   A 0.413
+4  EXOSC10 chr1 11140842 11140842  + Missense_Mutation SNP  C  C   T 0.423
+5    MTHFR chr1 11846458 11846458  +             3'UTR SNP  G  G   C 0.433
+6   ZNF436 chr1 23694481 23694481  +            Silent SNP  G  G   A 0.602
+     V29         V42   V43
+1 0.3158 Bladder-TCC DO561
+2 0.1628 Bladder-TCC DO561
+3 0.4694 Bladder-TCC DO561
+4 0.2667 Bladder-TCC DO561
+5 0.4667 Bladder-TCC DO561
+6 0.4792 Bladder-TCC DO561
+[1] "sensFPKM"
+   bin total found
+1 -7.5     1    NA
+2   -6     3    NA
+3   -5     1     1
+4 -4.5     5    NA
+5 -3.5   865    13
+6   -3   297    15
+  V2       V3       V4       V1    V29 V5
+1  1  1019573  1019574 C1orf159 0.3158  +
+2  1  2523049  2523050    MMEL1 0.1628  +
+3  1  6650897  6650898   KLHL21 0.4694  +
+4  1 11140842 11140843  EXOSC10 0.2667  +
+5  1 11846458 11846459    MTHFR 0.4667  +
+6  1 23694481 23694482   ZNF436 0.4792  +
+[1] "foundBedFile"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO561.found.bed"
+[1] "DO1257"
+[1] "tumor"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO1257.tumor.tmp"
+[1] "normal"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO1257.normal.tmp"
+[1] "tumor VCF VarDict"
+     V1        V2 V3 V4 V5    V6   V7    VAF TC VC
+1 chr16  11001322  .  C  G 255.0 None 0.4000 15  6
+2  chr3 156241949  .  T  C 255.0 None 0.6000  5  3
+3  chr3 156242649  .  A  C 255.0 None 1.0000  2  2
+4  chr3 156242884  .  G  A 255.0 None 0.7500  4  3
+5  chr3 156244447  .  A  G 255.0 None 1.0000 10 10
+6 chr19  41245742  .  C  T 255.0 None 0.3333 30 10
+    V1        V2 V3 V4 V5    V6   V7    VAF TC VC
+1 chrX 129493125  .  A  G 255.0 None 0.3333  6  2
+2 chrX 129493134  .  C  A 255.0 None 0.3333  6  2
+3 chrX 129493248  .  A  G 255.0 None 1.0000  2  2
+4 chrX 129494419  .  A  G 255.0 None 0.7500  8  6
+5 chrX 129494423  .  C  T 255.0 None 0.8571  7  6
+6 chr7  32977722  .  C  T 255.0 None 1.0000  2  2
+   Chr     Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chrX 129493125  .   A   G   255.0   None 0.3333              6            2
+2 chrX 129493134  .   C   A   255.0   None 0.3333              6            2
+3 chrX 129493248  .   A   G   255.0   None 1.0000              2            2
+4 chrX 129494419  .   A   G   255.0   None 0.7500              8            6
+5 chrX 129494423  .   C   T   255.0   None 0.8571              7            6
+6 chr7  32977722  .   C   T   255.0   None 1.0000              2            2
+[1] 137931
+    Chr    Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chr19 41246085  .   C   T   255.0   None 0.0294             68            2
+2 chr19 41246158  .   C   T   255.0   None 0.0211             95            2
+3 chr19 41246322  .   T   A   255.0   None 0.0208             96            2
+4 chr19 41246594  .   C   T   255.0   None 0.0290             69            2
+5 chr19 41246723  .   C   T   255.0   None 0.1053             19            2
+6 chr19 41247331  .   G   A   255.0   None 0.0625             32            2
+[1] 22000
+[1] "somaticMinusEdits:"
+[1] 190172     10
+[1] 79 10
+# A tibble: 11 x 2
+   V6                count
+ * <chr>             <int>
+ 1 3'UTR                 7
+ 2 5'Flank               5
+ 3 5'UTR                 3
+ 4 Frame_Shift_Ins       1
+ 5 IGR                  19
+ 6 Intron               20
+ 7 lincRNA               1
+ 8 Missense_Mutation    14
+ 9 RNA                   2
+10 Silent                3
+11 Splice_Site           1
+                                               V6 count
+3'UTR                                       3'UTR    20
+5'Flank                                   5'Flank    50
+5'UTR                                       5'UTR     6
+De_novo_Start_OutOfFrame De_novo_Start_OutOfFrame     1
+Frame_Shift_Del                   Frame_Shift_Del     1
+IGR                                           IGR  1404
+Intron                                     Intron  1101
+lincRNA                                   lincRNA   191
+Missense_Mutation               Missense_Mutation    12
+RNA                                           RNA   124
+Silent                                     Silent     5
+Splice_Site                           Splice_Site     1
+[1] "numInMaf"
+[1] 79
+[1] "totalMAF"
+[1] 411
+[1] "sensitivity"
+[1] 0.1612245
+[1] "Donor ID"
+[1] NA
+[1] "Sensitivity"
+[1] NA
+[1] "3'UTR"
+[1] 0.2592593
+[1] "5'UTR"
+[1] 0.3333333
+[1] "RNA"
+[1] 0.01587302
+[1] "lincRNA"
+[1] 0.005208333
+[1] "Silent"
+[1] 0.375
+[1] "Splice_Site"
+[1] 0.5
+[1] "De_novo_Start_InFrame"
+[1] NA
+[1] "De_novo_Start_OutOfFrame"
+[1] NA
+[1] "Missense_Mutation"
+[1] 0.5384615
+[1] "Nonsense_Mutation"
+[1] NA
+[1] "Nonstop_Mutation"
+[1] NA
+[1] "In_Frame_Del"
+[1] NA
+[1] "In_Frame_Ins"
+[1] NA
+[1] "Frame_Shift_Del"
+[1] NA
+[1] "Frame_Shift_Ins"
+[1] NA
+[1] "Start_Codon_Del"
+[1] NA
+[1] "Start_Codon_Ins"
+[1] NA
+[1] "Start_Codon_SNP"
+[1] NA
+[1] "Stop_Codon_Del"
+[1] NA
+[1] "Stop_Codon_Ins"
+[1] NA
+[1] "5'Flank"
+[1] 0.09090909
+[1] "Intron"
+[1] 0.01784121
+[1] "IGR"
+[1] 0.01335207
+[1] "foundMaf"
+       V1    V2        V3        V4 V5                V6  V7 V8 V9 V10   V17
+1   KDM4A  chr1  44126037  44126037  + Missense_Mutation SNP  A  A   G 0.393
+2 SLC39A1  chr1 153935082 153935082  + Missense_Mutation SNP  A  A   G 0.652
+3    LHX4  chr1 180246816 180246816  +             3'UTR SNP  G  G   A 0.413
+4  TMEM81  chr1 205053542 205053542  +             5'UTR SNP  A  A   C 0.398
+5    AIDA  chr1 222843570 222843570  + Missense_Mutation SNP  G  G   C 0.358
+6   CASC2 chr10 119821778 119821778  +               RNA SNP  A  A   G 0.333
+     V29            V42    V43
+1 0.2667 Breast-AdenoCa DO1257
+2 0.4186 Breast-AdenoCa DO1257
+3 0.1286 Breast-AdenoCa DO1257
+4 0.4872 Breast-AdenoCa DO1257
+5 0.1774 Breast-AdenoCa DO1257
+6 0.1194 Breast-AdenoCa DO1257
+[1] "sensFPKM"
+   bin total found
+1 -3.5   182    NA
+2   -3    24     1
+3 -2.5    30     4
+4   -2    16     1
+5 -1.5    10     1
+6   -1    14     1
+  V2        V3        V4      V1    V29 V5
+1  1  44126037  44126038   KDM4A 0.2667  +
+2  1 153935082 153935083 SLC39A1 0.4186  +
+3  1 180246816 180246817    LHX4 0.1286  +
+4  1 205053542 205053543  TMEM81 0.4872  +
+5  1 222843570 222843571    AIDA 0.1774  +
+6 10 119821778 119821779   CASC2 0.1194  +
+[1] "foundBedFile"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO1257.found.bed"
+[1] "DO5661"
+[1] "tumor"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO5661.tumor.tmp"
+[1] "normal"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO5661.normal.tmp"
+[1] "tumor VCF VarDict"
+     V1       V2 V3 V4 V5  V6   V7    VAF TC VC
+1 chr19 18591545  .  G  A 129 None 1.0000  2  2
+2 chr19 18591551  . CC TT 129 None 1.0000  2  2
+3  chr1 77440398  .  A AT 255 None 1.0000  2  2
+4 chr16 11001322  .  C  G 255 None 0.6286 35 22
+5 chr16 11002626  .  G  A 255 None 0.3750  8  3
+6 chr16 11002904  .  G  A 255 None 0.3125 64 20
+     V1        V2 V3 V4 V5    V6   V7    VAF  TC VC
+1 chr11  12688130  .  T  C 255.0 None 1.0000   2  2
+2  chr1 109502568  .  T  C 255.0 None 1.0000   2  2
+3 chr22  36652931  .  C  T 255.0 None 1.0000   3  3
+4 chr22  36653140  .  T  C 255.0 None 0.0120 167  2
+5 chr22  36653162  .  G  A 255.0 None 0.0136 147  2
+6 chr22  36654145  .  T  A 255.0 None 1.0000   2  2
+    Chr     Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chr11  12688130  .   T   C   255.0   None 1.0000              2            2
+2  chr1 109502568  .   T   C   255.0   None 1.0000              2            2
+3 chr22  36652931  .   C   T   255.0   None 1.0000              3            3
+4 chr22  36653140  .   T   C   255.0   None 0.0120            167            2
+5 chr22  36653162  .   G   A   255.0   None 0.0136            147            2
+6 chr22  36654145  .   T   A   255.0   None 1.0000              2            2
+[1] 98805
+    Chr    Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chr19 18591545  .   G   A     129   None 1.0000              2            2
+2 chr19 18591551  .  CC  TT     129   None 1.0000              2            2
+3  chr1 77440398  .   A  AT     255   None 1.0000              2            2
+4 chr16 11002626  .   G   A     255   None 0.3750              8            3
+5 chr19 41244887  .   G   A     255   None 0.5714              7            4
+6 chr19 41245302  .   G   A     255   None 0.0187            107            2
+[1] 28308
+[1] "somaticMinusEdits:"
+[1] 149220     10
+[1] 159  10
+# A tibble: 11 x 2
+   V6                       count
+ * <chr>                    <int>
+ 1 3'UTR                       35
+ 2 5'Flank                      2
+ 3 5'UTR                        9
+ 4 De_novo_Start_OutOfFrame     1
+ 5 Frame_Shift_Ins              1
+ 6 IGR                         13
+ 7 Intron                      33
+ 8 lincRNA                      8
+ 9 Missense_Mutation           38
+10 Silent                      12
+11 Splice_Site                  2
+                                 V6 count
+3'UTR                         3'UTR    33
+5'Flank                     5'Flank   198
+5'UTR                         5'UTR    31
+Frame_Shift_Del     Frame_Shift_Del     3
+Frame_Shift_Ins     Frame_Shift_Ins     1
+IGR                             IGR  4800
+Intron                       Intron  3932
+lincRNA                     lincRNA   686
+Missense_Mutation Missense_Mutation    49
+Nonsense_Mutation Nonsense_Mutation     3
+RNA                             RNA   377
+Silent                       Silent     6
+Splice_Site             Splice_Site     5
+[1] "numInMaf"
+[1] 159
+[1] "totalMAF"
+[1] 1392
+[1] "sensitivity"
+[1] 0.1025145
+[1] "Donor ID"
+[1] NA
+[1] "Sensitivity"
+[1] NA
+[1] "3'UTR"
+[1] 0.5147059
+[1] "5'UTR"
+[1] 0.225
+[1] "RNA"
+[1] NA
+[1] "lincRNA"
+[1] 0.01152738
+[1] "Silent"
+[1] 0.6666667
+[1] "Splice_Site"
+[1] 0.2857143
+[1] "De_novo_Start_InFrame"
+[1] NA
+[1] "De_novo_Start_OutOfFrame"
+[1] NA
+[1] "Missense_Mutation"
+[1] 0.4367816
+[1] "Nonsense_Mutation"
+[1] NA
+[1] "Nonstop_Mutation"
+[1] NA
+[1] "In_Frame_Del"
+[1] NA
+[1] "In_Frame_Ins"
+[1] NA
+[1] "Frame_Shift_Del"
+[1] NA
+[1] "Frame_Shift_Ins"
+[1] 0.5
+[1] "Start_Codon_Del"
+[1] NA
+[1] "Start_Codon_Ins"
+[1] NA
+[1] "Start_Codon_SNP"
+[1] NA
+[1] "Stop_Codon_Del"
+[1] NA
+[1] "Stop_Codon_Ins"
+[1] NA
+[1] "5'Flank"
+[1] 0.01
+[1] "Intron"
+[1] 0.008322825
+[1] "IGR"
+[1] 0.002701018
+[1] "foundMaf"
+      V1   V2        V3        V4 V5                V6  V7 V8 V9 V10   V17
+1   GNL2 chr1  38042076  38042076  + Missense_Mutation SNP  G  G   A 0.423
+2  GPSM2 chr1 109466693 109466693  + Missense_Mutation SNP  C  C   A 0.463
+3   ARNT chr1 150783973 150783973  +             3'UTR SNP  C  C   G 0.433
+4   RFX5 chr1 151315882 151315882  + Missense_Mutation SNP  T  T   C 0.517
+5   HAX1 chr1 154246391 154246391  + Missense_Mutation SNP  C  C   T 0.532
+6 FAM20B chr1 179043030 179043030  +             3'UTR SNP  C  C   G 0.438
+     V29            V42    V43
+1  0.087 Breast-AdenoCa DO5661
+2 0.1385 Breast-AdenoCa DO5661
+3 0.0714 Breast-AdenoCa DO5661
+4 0.4444 Breast-AdenoCa DO5661
+5 0.0645 Breast-AdenoCa DO5661
+6 0.2909 Breast-AdenoCa DO5661
+[1] "sensFPKM"
+   bin total found
+1   -7     1    NA
+2 -4.5     1    NA
+3   -4     2    NA
+4 -3.5   304    NA
+5   -3   106     2
+6 -2.5   201     6
+  V2        V3        V4     V1    V29 V5
+1  1  38042076  38042077   GNL2  0.087  +
+2  1 109466693 109466694  GPSM2 0.1385  +
+3  1 150783973 150783974   ARNT 0.0714  +
+4  1 151315882 151315883   RFX5 0.4444  +
+5  1 154246391 154246392   HAX1 0.0645  +
+6  1 179043030 179043031 FAM20B 0.2909  +
+[1] "foundBedFile"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO5661.found.bed"
+[1] "DO2078"
+[1] "tumor"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO2078.tumor.tmp"
+[1] "normal"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO2078.normal.tmp"
+[1] "tumor VCF VarDict"
+     V1       V2 V3 V4 V5    V6   V7    VAF TC VC
+1 chr16 11000848  .  G  C 255.0 None 0.5455 11  6
+2 chr16 11001128  .  A  G 255.0 None 0.1250 24  3
+3 chr16 11001680  .  G  T 255.0 None 0.4545 11  5
+4 chr16 11001770  .  G  T 255.0 None 0.6667  3  2
+5 chr16 11002626  .  G  A 255.0 None 1.0000  4  4
+6 chr16 11002904  .  G  A 255.0 None 0.3750  8  3
+     V1       V2 V3 V4 V5    V6   V7    VAF TC VC
+1  chr1 14380825  .  C  G 255.0 None 1.0000  2  2
+2 chr16 11000848  .  G  C 255.0 None 0.3636 11  4
+3 chr16 11001680  .  G  T 255.0 None 0.4286  7  3
+4 chr16 11001770  .  G  T 255.0 None 0.6667  6  4
+5 chr16 11002626  .  G  A 255.0 None 1.0000  2  2
+6 chr16 11002904  .  G  A 255.0 None 0.4000 15  6
+    Chr    Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1  chr1 14380825  .   C   G   255.0   None 1.0000              2            2
+2 chr16 11000848  .   G   C   255.0   None 0.3636             11            4
+3 chr16 11001680  .   G   T   255.0   None 0.4286              7            3
+4 chr16 11001770  .   G   T   255.0   None 0.6667              6            4
+5 chr16 11002626  .   G   A   255.0   None 1.0000              2            2
+6 chr16 11002904  .   G   A   255.0   None 0.4000             15            6
+[1] 133880
+    Chr     Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chr16  11001128  .   A   G   255.0   None 0.1250             24            3
+2  chr3 156243302  .   T  TT   255.0   None 0.3750              8            3
+3  chr3 156244932  .  TA  AT   255.0   None 0.4000              5            2
+4 chr19  41245302  .   G   T   255.0   None 0.0357             56            2
+5 chr19  41245304  .   C   T   255.0   None 0.0385             52            2
+6 chr19  41245307  .   G   C   255.0   None 0.0351             57            2
+[1] 26027
+[1] "somaticMinusEdits:"
+[1] 176628     10
+[1] 66 10
+# A tibble: 9 x 2
+  V6                count
+* <chr>             <int>
+1 3'UTR                18
+2 5'Flank               1
+3 5'UTR                 1
+4 IGR                   7
+5 Intron               22
+6 lincRNA               3
+7 Missense_Mutation     9
+8 RNA                   1
+9 Silent                2
+                                         V6 count
+3'UTR                                 3'UTR    86
+5'Flank                             5'Flank   170
+5'UTR                                 5'UTR    19
+De_novo_Start_InFrame De_novo_Start_InFrame     1
+Frame_Shift_Del             Frame_Shift_Del     8
+Frame_Shift_Ins             Frame_Shift_Ins     7
+IGR                                     IGR  4622
+In_Frame_Ins                   In_Frame_Ins     1
+Intron                               Intron  4132
+lincRNA                             lincRNA   639
+Missense_Mutation         Missense_Mutation    50
+Nonsense_Mutation         Nonsense_Mutation     5
+RNA                                     RNA   366
+Silent                               Silent    28
+Splice_Site                     Splice_Site     5
+[1] "numInMaf"
+[1] 66
+[1] "totalMAF"
+[1] 1385
+[1] "sensitivity"
+[1] 0.04548587
+[1] "Donor ID"
+[1] NA
+[1] "Sensitivity"
+[1] NA
+[1] "3'UTR"
+[1] 0.1730769
+[1] "5'UTR"
+[1] 0.05
+[1] "RNA"
+[1] 0.002724796
+[1] "lincRNA"
+[1] 0.004672897
+[1] "Silent"
+[1] 0.06666667
+[1] "Splice_Site"
+[1] NA
+[1] "De_novo_Start_InFrame"
+[1] NA
+[1] "De_novo_Start_OutOfFrame"
+[1] NA
+[1] "Missense_Mutation"
+[1] 0.1525424
+[1] "Nonsense_Mutation"
+[1] NA
+[1] "Nonstop_Mutation"
+[1] NA
+[1] "In_Frame_Del"
+[1] NA
+[1] "In_Frame_Ins"
+[1] NA
+[1] "Frame_Shift_Del"
+[1] NA
+[1] "Frame_Shift_Ins"
+[1] NA
+[1] "Start_Codon_Del"
+[1] NA
+[1] "Start_Codon_Ins"
+[1] NA
+[1] "Start_Codon_SNP"
+[1] NA
+[1] "Stop_Codon_Del"
+[1] NA
+[1] "Stop_Codon_Ins"
+[1] NA
+[1] "5'Flank"
+[1] 0.005847953
+[1] "Intron"
+[1] 0.0052961
+[1] "IGR"
+[1] 0.001512206
+[1] "foundMaf"
+       V1    V2        V3        V4 V5                V6  V7 V8 V9 V10   V17
+1 KHDRBS1  chr1  32509301  32509301  +             3'UTR SNP  G  G   T 0.368
+2  RNF115  chr1 145692399 145692399  +             3'UTR SNP  T  T   C 0.343
+3    POGK  chr1 166819372 166819372  + Missense_Mutation SNP  G  G   C 0.577
+4  ZNF496  chr1 247461858 247461858  +             3'UTR SNP  C  C   A 0.512
+5  GPR158 chr10  25889835  25889835  +             3'UTR SNP  A  A   G 0.408
+6 ANAPC16 chr10  73993130  73993130  +             3'UTR SNP  T  T   G 0.373
+     V29            V42    V43
+1 0.3864 Breast-AdenoCa DO2078
+2 0.2308 Breast-AdenoCa DO2078
+3 0.3953 Breast-AdenoCa DO2078
+4 0.3125 Breast-AdenoCa DO2078
+5   0.14 Breast-AdenoCa DO2078
+6 0.3438 Breast-AdenoCa DO2078
+[1] "sensFPKM"
+   bin total found
+1  -11     1    NA
+2 -7.5     1    NA
+3   -6     1    NA
+4 -5.5     1    NA
+5   -5     1    NA
+6 -4.5     1    NA
+  V2        V3        V4      V1    V29 V5
+1  1  32509301  32509302 KHDRBS1 0.3864  +
+2  1 145692399 145692400  RNF115 0.2308  +
+3  1 166819372 166819373    POGK 0.3953  +
+4  1 247461858 247461859  ZNF496 0.3125  +
+5 10  25889835  25889836  GPR158   0.14  +
+6 10  73993130  73993131 ANAPC16 0.3438  +
+[1] "foundBedFile"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO2078.found.bed"
+[1] "DO5200"
+[1] "tumor"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO5200.tumor.tmp"
+[1] "normal"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO5200.normal.tmp"
+[1] "tumor VCF VarDict"
+     V1        V2 V3 V4 V5    V6   V7    VAF TC VC
+1  chrX 129493131  .  A  G 255.0 None 1.0000  3  3
+2 chr16  11000848  .  G  C 255.0 None 0.5556  9  5
+3 chr16  11002904  .  G  A 255.0 None 0.3529 17  6
+4 chr16  11002927  .  A  G 255.0 None 1.0000 13 13
+5 chr22  26776861  .  C  G 255.0 None 1.0000  2  2
+6 chr22  26777440  .  G  A 255.0 None 1.0000  3  3
+    V1       V2 V3 V4 V5    V6   V7    VAF TC VC
+1 chr1  2231463  .  C  T 255.0 None 0.4000  5  2
+2 chr1  2231567  .  G  T 255.0 None 0.6667  3  2
+3 chr1  2233332  .  T  G 255.0 None 1.0000  3  3
+4 chr1  2233890  .  T  C 255.0 None 0.4286  7  3
+5 chr1  2234251  .  A  G 255.0 None 0.6000  5  3
+6 chr9 43763238  .  T  C   3.0 None 1.0000  2  2
+   Chr    Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chr1  2231463  .   C   T   255.0   None 0.4000              5            2
+2 chr1  2231567  .   G   T   255.0   None 0.6667              3            2
+3 chr1  2233332  .   T   G   255.0   None 1.0000              3            3
+4 chr1  2233890  .   T   C   255.0   None 0.4286              7            3
+5 chr1  2234251  .   A   G   255.0   None 0.6000              5            3
+6 chr9 43763238  .   T   C     3.0   None 1.0000              2            2
+[1] 94067
+    Chr     Start ID Ref Alt Quality Filter    VAF Total.Coverage Alt.Coverage
+1 chr22  26776861  .   C   G   255.0   None 1.0000              2            2
+2 chr22  26777440  .   G   A   255.0   None 1.0000              3            3
+3 chr22  26778012  .   T   C   255.0   None 1.0000              2            2
+4  chr3 156243208  .   A  AA   255.0   None 0.6667              3            2
+5  chr3 156243592  .   T   C   255.0   None 0.6667              3            2
+6 chr19  41244921  .   C   G   255.0   None 0.6667              3            2
+[1] 27195
+[1] "somaticMinusEdits:"
+[1] 144560     10
+[1] 150  10
+# A tibble: 11 x 2
+   V6                count
+ * <chr>             <int>
+ 1 3'UTR                40
+ 2 5'Flank               4
+ 3 5'UTR                 2
+ 4 IGR                  13
+ 5 Intron               17
+ 6 lincRNA               2
+ 7 Missense_Mutation    39
+ 8 Nonsense_Mutation     3
+ 9 RNA                   3
+10 Silent               21
+11 Splice_Site           1
+                                               V6 count
+3'UTR                                       3'UTR    69
+5'Flank                                   5'Flank   209
+5'UTR                                       5'UTR    16
+De_novo_Start_OutOfFrame De_novo_Start_OutOfFrame     1
+Frame_Shift_Del                   Frame_Shift_Del     3
+IGR                                           IGR  7075
+In_Frame_Del                         In_Frame_Del     2
+Intron                                     Intron  5060
+lincRNA                                   lincRNA   981
+Missense_Mutation               Missense_Mutation    44
+Nonsense_Mutation               Nonsense_Mutation     5
+RNA                                           RNA   527
+Silent                                     Silent    23
+Splice_Site                           Splice_Site     3
+[1] "numInMaf"
+[1] 150
+[1] "totalMAF"
+[1] 1883
+[1] "sensitivity"
+[1] 0.07378259
+[1] "Donor ID"
+[1] NA
+[1] "Sensitivity"
+[1] NA
+[1] "3'UTR"
+[1] 0.3669725
+[1] "5'UTR"
+[1] 0.1111111
+[1] "RNA"
+[1] 0.005660377
+[1] "lincRNA"
+[1] 0.002034588
+[1] "Silent"
+[1] 0.4772727
+[1] "Splice_Site"
+[1] 0.25
+[1] "De_novo_Start_InFrame"
+[1] NA
+[1] "De_novo_Start_OutOfFrame"
+[1] NA
+[1] "Missense_Mutation"
+[1] 0.4698795
+[1] "Nonsense_Mutation"
+[1] 0.375
+[1] "Nonstop_Mutation"
+[1] NA
+[1] "In_Frame_Del"
+[1] NA
+[1] "In_Frame_Ins"
+[1] NA
+[1] "Frame_Shift_Del"
+[1] NA
+[1] "Frame_Shift_Ins"
+[1] NA
+[1] "Start_Codon_Del"
+[1] NA
+[1] "Start_Codon_Ins"
+[1] NA
+[1] "Start_Codon_SNP"
+[1] NA
+[1] "Stop_Codon_Del"
+[1] NA
+[1] "Stop_Codon_Ins"
+[1] NA
+[1] "5'Flank"
+[1] 0.01877934
+[1] "Intron"
+[1] 0.003348434
+[1] "IGR"
+[1] 0.001834086
+[1] "foundMaf"
+      V1   V2        V3        V4 V5                V6  V7 V8 V9 V10   V17
+1 ZBTB8A chr1  33066685  33066685  +             3'UTR SNP  G  G   A 0.284
+2  FNDC5 chr1  33327949  33327949  +             3'UTR SNP  T  T   A 0.458
+3 OTUD7B chr1 149910872 149910872  +             3'UTR SNP  G  G   A 0.522
+4   SHC1 chr1 154934779 154934779  +             3'UTR SNP  G  G   A 0.552
+5   SHC1 chr1 154935761 154935761  +             3'UTR SNP  G  G   C 0.493
+6   SHC1 chr1 154938529 154938529  + Missense_Mutation SNP  G  G   C 0.592
+     V29            V42    V43
+1 0.3571 Breast-AdenoCa DO5200
+2    0.2 Breast-AdenoCa DO5200
+3 0.5122 Breast-AdenoCa DO5200
+4 0.1455 Breast-AdenoCa DO5200
+5 0.0781 Breast-AdenoCa DO5200
+6 0.0952 Breast-AdenoCa DO5200
+[1] "sensFPKM"
+   bin total found
+1 -5.5     1    NA
+2 -3.5   722    NA
+3   -3   238     1
+4 -2.5   175     3
+5   -2    82     4
+6 -1.5    41    NA
+  V2        V3        V4     V1    V29 V5
+1  1  33066685  33066686 ZBTB8A 0.3571  +
+2  1  33327949  33327950  FNDC5    0.2  +
+3  1 149910872 149910873 OTUD7B 0.5122  +
+4  1 154934779 154934780   SHC1 0.1455  +
+5  1 154935761 154935762   SHC1 0.0781  +
+6  1 154938529 154938530   SHC1 0.0952  +
+[1] "foundBedFile"
+[1] "/scratch/amak/varCalls/VarDict/tumor-vcfs/DO5200.found.bed"

@@ -1,0 +1,2 @@
+
+"Donor ID \t Sensitivity \t numFiltGermline \t numFiltEdits \t 3'UTR \t 5'UTR \t RNA \t lincRNA \t Silent \t Splice_Site \t De_novo_Start_InFrame \t De_novo_Start_OutOfFrame \t Missense_Mutation \t Nonsense_Mutation \t Nonstop_Mutation \t In_Frame_Del \t In_Frame_Ins \t Frame_Shift_Del \t Frame_Shift_Ins \t Start_Codon_Del \t Start_Codon_Ins \t Start_Codon_SNP \t Stop_Codon_Del \t Stop_Codon_Ins \t 5'Flank \t Intron \t IGR"

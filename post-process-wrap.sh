@@ -2,21 +2,38 @@
 #$ -cwd
 
 
-whitelist="/pod/pstore/groups/brookslab/amak/var-prediction-testing/ref-features/October_2016_whitelist_2583.snv_mnv_indel.maf"
-#whitelist="/pod/pstore/groups/brookslab/amak/var-prediction-testing/download-lists/second-download-set-tcga/new_whitelist.maf"
+#whitelist="/pod/pstore/groups/brookslab/amak/var-prediction-testing/ref-features/October_2016_whitelist_2583.snv_mnv_indel.maf"
+whitelist="/pod/pstore/groups/brookslab/amak/var-prediction-testing/download-lists/second-download-set-tcga/new_whitelist.maf"
 #URLlist="/pod/pstore/groups/brookslab/amak/var-prediction-testing/download-lists/wgs-match-RNAseq-tumor-normal-refList-head.tsv"
+tumorBamsDir="/scratch/jakutagawa/RNA-seq/realigned_bams/tumor"
 URLlist="/pod/pstore/groups/brookslab/csoulette/projects/PCAWG/metadata/release_may2016.v1.4.tsv"
 metadata="/pod/pstore/groups/brookslab/amak/var-prediction-testing/download-lists/second-download-set-tcga/metadata.cart.2018-05-29.json"
 pcawgIDs="/pod/pstore/groups/brookslab/amak/var-prediction-testing/download-lists/second-download-set-tcga/pcawgIDs.tsv"
 tophatExp="/pod/pstore/groups/brookslab/amak/var-prediction-testing/expression/star_tophat_fpkm_geneID.donor.log"
-parentdir="/scratch/amak/varCalls/Mutect/"
-#parentdir="/scratch/amak/varCalls/VarDict/round-one-results/sample1"
-varOut="/scratch/amak/varCalls/VarDict/round-one-results/sample1"
-platOut="/scratch/amak/varCalls/Platypus/tumor-vcfs/"
-mutOut="/scratch/amak/varCalls/Mutect/tumor-vcfs/"
-hapOut=""
 rnaEdit="/pod/pstore/groups/brookslab/amak/var-prediction-testing/ref-features/Human_AG_rnaeditsites_hg19_v2.txt"
+ensemblIDs="/pod/pstore/groups/brookslab/amak/var-prediction-testing/ref-features/GRCH37_trimmed.gtf"
 
+
+## If working with VarDict ##
+parentdir="/scratch/amak/varCalls/VarDict/tumor-vcfs"
+normdir="/scratch/amak/varCalls/VarDict/normal-vcfs"
+outdir="/scratch/amak/varCalls/VarDict"
+tool="VarDict"
+
+## If working with Platypus ##
+#parentdir="/scratch/amak/varCalls/Platypus/tumor-vcfs"
+#normdir="/scratch/amak/varCalls/Platypus/normal-vcfs"
+#outdir="/scratch/amak/varCalls/Platypus"
+#tool="Platypus"
+
+## If working with Mutect ##
+#parentdir="/scratch/amak/varCalls/Mutect/tumor-vcfs/"
+#normdir="/scratch/amak/varCalls/Mutect/normal-vcfs/"
+#outdir="/scratch/amak/varCalls/Mutect"
+#tool="Mutect"
+
+## Set out directory for plots and intermediate files
+plotOuts=$(dirname $parentdir)
 #For all VarDict VCFs --> will find all corresponding VCFs from other tools
 for vcf in $(find $parentdir -name '*.vcf'); do
     echo 
@@ -25,7 +42,9 @@ for vcf in $(find $parentdir -name '*.vcf'); do
     IFS='_.'; set $uid; uid=$(echo $1) 
     IFS=''
 
-#    echo $uid
+    echo 'uid' $uid
+    tumorBam=$(find $tumorBamsDir -name "*$uid*_gdc_realn_rehead.realigned_hs37d.bam")
+    echo 'tumorBam'  $tumorBam
     # Grab the case ID from the metadata file and use it to find the match normal file name. Use the case IDs to find the line from the URL list containing the Donor ID and match-normal ID
     caseID=$(grep -A 10 $uid $metadata | grep case_id)
 
@@ -47,67 +66,82 @@ for vcf in $(find $parentdir -name '*.vcf'); do
     donorID=$(echo $donorLine | awk 'BEGIN {FS="\t"}; {print $5}')
     echo 'Donor ID: ' $donorID
 
-    ## Helber code for making a donor-list for filtering ##
-"""
-    if grep -q $donorID '/pod/pstore/groups/brookslab/amak/scripts/Variant-Calling/donor-list.txt'; then
-	continue
-    else
-	echo $donorID >> 'donor-list.txt'
-    fi
-"""
+    ## Helber code for making a donor-list for filtering, makes list of donors so can filter to reduce dimensions of PCAWG whitelist ##
+
+#    if grep -q $donorID '/pod/pstore/groups/brookslab/amak/scripts/Variant-Calling/donor-list.txt'; then
+#	continue
+#    else
+#	echo $donorID >> 'donor-list.txt'
+#    fi
+
     #Write whitelist MAF to temporary file 
-#    donorMaf=$parentdir'/'$donorID'.maf'
-    #Once I have the set of BAMs we're working with, subset so this is faster
+    donorMaf=$parentdir'/'$donorID'.maf'
+
     time grep $donorID $whitelist > $parentdir'/'$donorID'.maf'
 
 
     #Grab expression data for Donor
     time awk -v col=$donorID 'NR==1{for(i=1;i<=NF;i++){if($i==col){c=i;break}} print $c} NR>1{print $1, "\t", $2, "\t", $c}' $tophatExp > $parentdir'/'$donorID'.fpkm'
-#    echo $FPKM
+    sed -i 1d $parentdir'/'$donorID'.fpkm'
+    ## for when file id is the same as UID
     #Grab Match Normal
-    STARNormal=$(echo $donorLine | awk 'BEGIN {FS="\t"}; {print $73}')
-    STARTumor=$(echo $donorLine | awk 'BEGIN {FS="\t"}; {print $87}')
-    tophatNormal=$(echo $donorLine | awk 'BEGIN {FS="\t"}; {print $77}')
-    tophatTumor=$(echo $donorLine | awk 'BEGIN {FS="\t"}; {print $91}')
-    echo $tophatNormal
-    IFS=.
-    set $STARNormal
-    normal=$(echo $2 | sed 's/", //g' | sed 's/ "//g')   
-    set $STARTumor
-    tumor=$(echo $2 | sed 's/", //g' | sed 's/ "//g')
-    echo 'tumor' $tumor
-    unset IFS
+#    STARNormal=$(echo $donorLine | awk 'BEGIN {FS="\t"}; {print $73}')
+#    STARTumor=$(echo $donorLine | awk 'BEGIN {FS="\t"}; {print $87}')
+#    tophatNormal=$(echo $donorLine | awk 'BEGIN {FS="\t"}; {print $77}')
+#    tophatTumor=$(echo $donorLine | awk 'BEGIN {FS="\t"}; {print $91}')
+#    echo $tophatNormal
+#    IFS=.
+#    set $STARNormal
+#    normal=$(echo $2 | sed 's/", //g' | sed 's/ "//g')   
+#    set $STARTumor
+#    tumor=$(echo $2 | sed 's/", //g' | sed 's/ "//g')
+#    echo 'tumor' $tumor
+#    unset IFS
 #    findStar='*'$STARNormal'*'
-    varVCFN=$(find $varOut -mindepth 1 -name "*${normal}*.vcf")
-    varVCFT=$(find $varOut -mindepth 1 -name "*${tumor}*.vcf")
 
-    mutVCFN=$(find $mutOut -mindepth 1 -name "*${normalID}*.vcf")
-    mutVCFT=$(find $mutOut -mindepth 1 -name "*${tumor}*.vcf")
-    echo 
-    echo 'vcf tumor: ' $mutVCFT
-    echo 'vcf normal: ' $mutVCFN
+    find $normdir -mindepth 1 -type f -name "*${normalID}*.vcf" -print0 | xargs -0 grep -v "\#" > $parentdir'/'$donorID'.normal.tmp'
+    grep -v "\#" $vcf > $parentdir'/'$donorID'.tumor.tmp'
+    VCFN="$parentdir/$donorID.normal.tmp"
+    VCFT="$parentdir/$donorID.tumor.tmp"
+
     echo 'donor MAF: ' $donorMaf
-
-#    platVCFN=$(find $platOut -name '*'$STARNormal'*')
-#    platVCFT=$(find $platOut -name '*'$STARTumor'*')
-#    mutVCFN=$(find $mutOut -name '*'$STARNormal'*')
-#    mutVCFT=$(find $mutOut -name '*'$STARTumor'*')
-#    hapVCFN=$(find $hapOut -name '*'$STARNormal'*')
-#    hapVCFT=$(find $hapOut -name '*'$STARTumor'*')
-     
     echo 'donor id ' $donorID
-    echo 'UID ' $uid
 
-    echo 'tophat Normal: ' $tophatNormal
+    ## R script takes temp maf and temp FPKM for given donor and writes 
+    # countBreakdown.txt <- counts of variants missed compared to whitelist
+    # sensitivityFPKM.txt <- sensitivity vs FPKM data frame
+    # found/notFound.bed <- bed files for extracting read coverage at variants found/not found
+    time Rscript compareWhitelist.R $parentdir $parentdir'/'$donorID'.maf' $VCFT $VCFN $rnaEdit $parentdir'/'$donorID'.fpkm' $ensemblIDs $donorID $outdir >> testR.log
+#    echo "time Rscript compareWhitelist.R $parentdir $parentdir/$donorID.maf $VCFT $VCFN $rnaEdit $parentdir/$donorID.fpkm $donorID"
     
-    echo 'star tumor: ' $STARTumor
-    echo  'star normal: ' $STARNormal
+    echo 
+    ## call bedtools coverage to get coverage 
+    samtools bedcov $parentdir'/'$donorID'.found.bed' $tumorBam > $parentdir'/'$donorID'.found.cov.txt'
+    samtools bedcov $parentdir'/'$donorID'.notFound.bed' $tumorBam > $parentdir'/'$donorID'.notFound.cov.txt'
+#    bedtools coverage -abam $tumorBam -b $parentdir'/'$donorID'.found.bed' > $parentdir'/'$donorID'.found.cov.txt' -counts
 
-    #Supply files and paths to R for filtering and comparing to whitelist MAF file
+#    bedtools coverage -abam $tumorBam -b $parentdir'/'$donorID'.notFound.bed' > $parentdir'/'$donorID'.notFound.cov.txt' -counts
+    ## Wait until R script is done and delete temporary donor maf and fpkm files ##
+    wait
 
-#    Rscript compareWhitelist.R $parentdir $parentdir'/'$donorID'.maf' $varVCFT $varVCFN $rnaEdit
+    find $parentdir -name "*.tmp" -type f -delete
+    find $parentdir -name "*.maf" -type f -delete
+    find $parentdir -name "*.fpkm" -type f -delete
+#    find $parentdir -name "*.bed" -type f -delete
 
+ 
 
-# rm donorMaf
 
 done
+
+
+
+
+## Add header to file outlining breakdown of missed variants compared to whitelist ## 
+echo -e "Donor ID \t Sensitivity \t numFiltGermline \t numFiltEdits \t 3'UTR \t 5'UTR \t RNA \t lincRNA \t Silent \t Splice_Site \t De_novo_Start_InFrame \t De_novo_Start_OutOfFrame \t Missense_Mutation \t Nonsense_Mutation \t Nonstop_Mutation \t In_Frame_Del \t In_Frame_Ins \t Frame_Shift_Del \t Frame_Shift_Ins \t Start_Codon_Del \t Start_Codon_Ins \t Start_Codon_SNP \t Stop_Codon_Del \t Stop_Codon_Ins \t 5'Flank \t Intron \t IGR" | cat - $plotOuts'/countBreakdown.txt' > tmp && mv tmp $plotOuts'/countBreakdown.txt' 
+## Plot count breakdown and sensitivity vs FPKM 
+Rscript histogramBreakdown.R $plotOuts $tool
+
+## put all found coverage files together to pass to makeCompiled.R
+cat $parentdir'/*.found.cov.txt' > $plotOuts'/found.cov.txt'
+cat $parentdir'/*.notFound.cov.txt' > $plotOuts'/notFound.cov.txt'

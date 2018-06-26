@@ -19,18 +19,22 @@ outDir="/scratch/amak/varCalls/Platypus/normal-vcfs"
 opossum="/pod/pstore/groups/brookslab/amak/packages/Opossum/Opossum.py"
 platypus="/pod/pstore/groups/brookslab/amak/packages/Platypus/bin/Platypus.py"
 #Specify here the number of concurrent jobs
-numJobs=2
+maxProcesses=$1
+if [ $maxProcesses -eq 0 ]; then
+    echo "Max number of processes not supplied. Defaulting to 4"
+    maxProcesses=4
+fi
 
 
 function maxJobs {
     # Waits until there are less than 'numJobs' jobs running before starting a new job
-    while [ $(jobs | wc -l) -ge 2 ]; do
+    while [ $(jobs | wc -l) -ge $maxProcesses ]; do
 	echo 'waiting'
 	sleep 5
     done
 }
 
-for bam in $(find $parentdir -mindepth 1 -name '*hs37d.bam'); do
+for bam in $(find $parentdir -mindepth 1 -name '*hs37d5.bam'); do
     uid=$(basename $bam)
     IFS='.'
     set $uid

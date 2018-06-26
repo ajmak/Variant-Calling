@@ -10,7 +10,6 @@ import os
 def parseVar(varInput, vcf):
     i=0
     for line in open(varInput, 'r'):
-#        print(i)
         each = line.rstrip().split()
         if len(each) < 34:
             print('SKIPPED')
@@ -25,12 +24,15 @@ def parseVar(varInput, vcf):
             end = each[4]
             refAllele = each[5]
             altAllele = each[6]
-            qual = each[18]
-            ID = ''
+            coverage = each[7]
+            altDepth = each[8]
+            VAF = each[14]
+            mapQual = each[20]
+            ID = '.'
             info = each[33]
         
 
-            vcf.write('{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6} \t {7} \n'.format(chrm, start, ID, refAllele, altAllele, qual, 'None',  info))
+            vcf.write('{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6} \t {7} \n'.format(chrm, start, ID, refAllele, altAllele, mapQual, 'None', 'AF=' + str(VAF) + ';TC=' + str(coverage) + ';AC=' + str(altDepth) ))
         i+=1
 var = sys.argv[1]
 vcf = open(var + '.vcf', 'w+')
