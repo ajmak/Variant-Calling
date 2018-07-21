@@ -11,7 +11,7 @@ if (length(args)==0) {
 
 
 setwd(args[1])
-
+parentdir=args[1]
 whitelist=read.delim(args[2], sep="\t", header=FALSE, stringsAsFactors=FALSE, strip.white=TRUE)
 tumorVCF=read.table(args[3], sep='\t', header=FALSE, stringsAsFactors=FALSE, strip.white=TRUE)
 normalVCF=read.table(args[4], sep='\t', header=FALSE, stringsAsFactors=FALSE, strip.white=TRUE)
@@ -20,6 +20,7 @@ doFPKM=read.table(args[6], sep='\t', header=FALSE, stringsAsFactors=FALSE, strip
 ensembl=read.table(args[7], sep='\t', header=FALSE, stringsAsFactors=FALSE, strip.white=TRUE)
 donorID=args[8]
 outdir=args[9]
+ponMode=args[10]
 
 print(donorID)
 print("tumor")
@@ -37,36 +38,39 @@ if (grepl("Platypus", args[1])==TRUE) {
    print("In PLATYPUS")
    library("tidyr")
    print(head(tumorVCF))
+   print(head(normalVCF))
    # Separate 'INFO' column and extract VAF and Coverage #
-   
-   normalVCF <- normalVCF %>% extract(V10, c("one", "VC"), regex="(.*):(.*)$")
-   tumorVCF <- tumorVCF %>% extract(V10, c("one", "VC"), regex="(.*):(.*)$")
 
-   normalVCF <- normalVCF %>% separate(V8, c("V8", "VAF", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21", "TC", "TCF", "TCR"), ";")
-   tumorVCF <- tumorVCF %>% separate(V8, c("V8", "VAF", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21", "TC", "TCF", "TCR"), ";")
+#   normalVCF <- normalVCF %>% extract(V10, c("one", "VC"), regex="(.*):(.*)$")
+#   tumorVCF <- tumorVCF %>% extract(V10, c("one", "VC"), regex="(.*):(.*)$")
 
-   normalVCF <- select(normalVCF, -8, -(10:21), -25, -one)
-   tumorVCF <- select(tumorVCF, -8, -(10:21), -25, -one)
+#   normalVCF <- normalVCF %>% separate(V8, c("V8", "VAF", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21", "TC", "TCF", "TCR"), ";")
+#   tumorVCF <- tumorVCF %>% separate(V8, c("V8", "VAF", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17", "V18", "V19", "V20", "V21", "TC", "TCF", "TCR"), ";")
 
+#   normalVCF <- select(normalVCF, -8, -(10:21), -25, -one)
+#   tumorVCF <- select(tumorVCF, -8, -(10:21), -25, -one)
+
+    normalVCF <- select(normalVCF, (1:8))
+   tumorVCF <- select(tumorVCF, (1:8))
 
 
    ########## Remove unnecessary characters ###########
-   tumorVCF$VAF <- gsub("[TCFR\\=]", "", tumorVCF$VAF)
-   tumorVCF$TC <- gsub("[TCFR\\=]", "", tumorVCF$TC)
-   tumorVCF$TCF <- gsub("[TCFR\\=]", "", tumorVCF$TCF)
-   tumorVCF$TCR <- gsub("[TCFR\\=]", "", tumorVCF$TCR)
+#   tumorVCF$VAF <- gsub("[TCFR\\=]", "", tumorVCF$VAF)
+#   tumorVCF$TC <- gsub("[TCFR\\=]", "", tumorVCF$TC)
+#   tumorVCF$TCF <- gsub("[TCFR\\=]", "", tumorVCF$TCF)
+#   tumorVCF$TCR <- gsub("[TCFR\\=]", "", tumorVCF$TCR)
 
-   normalVCF$VAF <- gsub("[TCFR\\=]", "", normalVCF$VAF)
-   normalVCF$TC <- gsub("[TCFR\\=]", "", normalVCF$TC)
-   normalVCF$TCF <- gsub("[TCFR\\=]", "", normalVCF$TCF)
-   normalVCF$TCR <- gsub("[TCFR\\=]", "", normalVCF$TCR)
+#   normalVCF$VAF <- gsub("[TCFR\\=]", "", normalVCF$VAF)
+#   normalVCF$TC <- gsub("[TCFR\\=]", "", normalVCF$TC)
+#   normalVCF$TCF <- gsub("[TCFR\\=]", "", normalVCF$TCF)
+#   normalVCF$TCR <- gsub("[TCFR\\=]", "", normalVCF$TCR)
    print("tumor VCF Platypus")
    print(head(tumorVCF))
    normalVCF <- as.data.frame(normalVCF)
    tumorVCF <- as.data.frame(tumorVCF)
    ############### Change column names ################
-   colnames(tumorVCF) <- c("Chr", "Start", "ID", "Ref", "Alt", "Quality", "Filter", "VAF", "Total.Coverage", "Forward.Coverage", "Reverse.Coverage", "Alt.Coverage")
-   colnames(normalVCF) <- c("Chr", "Start", "ID", "Ref", "Alt", "Quality", "Filter", "VAF", "Total.Coverage", "Forward.Coverage", "Reverse.Coverage", "Alt.Coverage")
+   colnames(tumorVCF) <- c("Chr", "Start", "ID", "Ref", "Alt", "Quality", "Filter", "VAF") #, "Total.Coverage", "Forward.Coverage", "Reverse.Coverage", "Alt.Coverage")
+   colnames(normalVCF) <- c("Chr", "Start", "ID", "Ref", "Alt", "Quality", "Filter", "VAF") #, "Total.Coverage", "Forward.Coverage", "Reverse.Coverage", "Alt.Coverage")
 
 } else if (grepl("VarDict", args[1])==TRUE) {
   tool <- "VarDict"
@@ -90,6 +94,7 @@ if (grepl("Platypus", args[1])==TRUE) {
   print("tumor VCF VarDict")
   print(head(tumorVCF))
   print(head(normalVCF))
+  normalVCF <- select(normalVCF, -11, -12)
   colnames(tumorVCF) <- c("Chr", "Start", "ID", "Ref", "Alt", "Quality", "Filter", "VAF", "Total.Coverage", "Alt.Coverage")  
   colnames(normalVCF) <- c("Chr", "Start", "ID", "Ref", "Alt", "Quality", "Filter", "VAF", "Total.Coverage", "Alt.Coverage")
   print(head(normalVCF))
@@ -101,23 +106,56 @@ if (grepl("Platypus", args[1])==TRUE) {
 #  whitelist <- replace(whitelist$V7, whitelist$V7=="DNP","Complex")
 } else {
   tool <- "Mutect2"
-  print("do nothing")
+  print("in Mutect")
+  ############### Change column names ################
+  normalVCF$V1 <- paste('chr', normalVCF$V1, sep="")
+  tumorVCF$V1 <- paste('chr', tumorVCF$V1, sep="")
+
+  library("tidyr")
+  normalVCF <- normalVCF %>% separate(V8, c("VAF", "TC", "VC"), ";")
+  tumorVCF <- tumorVCF %>% separate(V8, c("VAF", "TC", "VC"), ";")
+  tumorVCF$VAF <- gsub("[VATCFR\\=]", "", tumorVCF$VAF)
+  tumorVCF$TC <- gsub("[VATCFR\\=]", "", tumorVCF$TC)
+  tumorVCF$VC <- gsub("[VATCFR\\=]", "", tumorVCF$VC)
+
+  normalVCF$VAF <- gsub("[VATCFR\\=]", "", normalVCF$VAF)
+  normalVCF$TC <- gsub("[VATCFR\\=]", "", normalVCF$TC)
+  normalVCF$VC <- gsub("[VATCFR\\=]", "", normalVCF$VC)
+
+  normalVCF <- as.data.frame(normalVCF)
+  tumorVCF <- as.data.frame(tumorVCF)
+  print("tumor VCF Mutect")
+  print(head(tumorVCF))
+  print(head(normalVCF))
+  normalVCF <- select(normalVCF, -11, -12)
+  tumorVCF  <- select(tumorVCF, -11, -12)
+  colnames(tumorVCF) <- c("Chr", "Start", "ID", "Ref", "Alt", "Quality", "Filter", "VAF", "Total.Coverage", "Alt.Coverage")
+  colnames(normalVCF) <- c("Chr", "Start", "ID", "Ref", "Alt", "Quality", "Filter", "VAF", "Total.Coverage", "Alt.Coverage")
+  print('edited colnames')
+  print(head(normalVCF))
+  print(head(tumorVCF))
 }
 
 
 ########################## Filter out normals ########################## 
-
-#Filter out incomplete lines
 tumorVCF$Start <- as.numeric(tumorVCF$Start)
 normalVCF$Start <- as.numeric(normalVCF$Start)
+#Filter out incomplete lines
+
 normalVCF <- normalVCF %>% filter(!is.na(normalVCF$Start))
 tumorVCF <- tumorVCF %>% filter(!is.na(tumorVCF$Start))
 
-# Filter out normal calls
-somatic <- tumorVCF %>% anti_join(normalVCF, by="Start", "Chr")
-numFiltGermline <- dim(tumorVCF)[1] - dim(somatic)[1]
-numFiltGermline
-
+if (isTRUE(all.equal(ponMode, 'true')) & isTRUE(all.equal(tool, 'Mutect2'))) {
+   print("Mutect2 no PON")
+   numFiltGermline=0
+   somatic <- tumorVCF
+} else {
+  print("Filtering with PON")
+  # Filter out normal calls
+  somatic <- tumorVCF %>% anti_join(normalVCF, by="Start", "Chr")
+  numFiltGermline <- dim(tumorVCF)[1] - dim(somatic)[1]
+ 
+}
 ########################## Filter out RNA editing sites ##########################
 rnaEdit$position <- as.numeric(rnaEdit$position)
 
@@ -155,7 +193,8 @@ numInMaf <- dim(foundInMaf)[1]
 Maflocs <- whitelist %>% semi_join(somaticMinusEdits, by=c("V2"="Chr", "V3"="Start"))
 foundBreakdown <- Maflocs %>% group_by(V6) %>% summarize(count=n())
 rownames(foundBreakdown) <- foundBreakdown$V6
-print(foundBreakdown)
+print('foundBreakdown')
+print(as.data.frame(foundBreakdown))
 
 ### whitelist annotations for variants not found by caller ###
 MafNotFound <- whitelist %>% anti_join(somaticMinusEdits, by=c("V2"="Chr", "V3"="Start"))
@@ -163,7 +202,8 @@ MafNotFound <- as.data.frame(MafNotFound)
 
 breakdown <- as.data.frame(MafNotFound %>% group_by(V6) %>% summarise(count=n()))
 rownames(breakdown) <- breakdown$V6
-print(breakdown)
+print('breakdown')
+print(as.data.frame(breakdown))
 
 # Filter out intronic, intergenic
 notFoundMinusIntron <- MafNotFound %>% filter(V6!="Intron", V6!="IGR")
@@ -236,7 +276,13 @@ totList <- list()
 i <- 1
 for (var in variant.types) {
     print(var)
-    total <- as.numeric(breakdown[var,][2]))
+    print('total')
+    print(breakdown[var,][2])
+    found <- as.numeric(foundBreakdown[var,][2])
+    notFound <- as.numeric(breakdown[var,][2])
+    found <- replace(found, is.na(found), 0)
+    notFound <- replace(notFound, is.na(notFound), 0)
+    total <- found + notFound
     totList[[i]] <- total
     print(total)
     i <- i + 1
@@ -246,7 +292,7 @@ totList[1] <- donorID
 totList[2] <- total
 
 totOut=paste(outdir, "/totalBreakdown.txt", sep="")
-rite.table(totList, file=totOut, sep="\t", quote=FALSE, append=TRUE, col.names=FALSE, row.names=FALSE)
+write.table(totList, file=totOut, sep="\t", quote=FALSE, append=TRUE, col.names=FALSE, row.names=FALSE)
 
 
 ########################## Compare FPKM ##########################
@@ -338,8 +384,8 @@ foundBed[,3] <- foundBed[,2] + 1
 notFoundBed[,3] <- notFoundBed[,2] + 1
 
 
-foundBedFile=paste(outdir, "/tumor-vcfs/", donorID, ".found.bed", sep="")
-notFoundBedFile=paste(outdir, "/tumor-vcfs/", donorID, ".notFound.bed", sep="")
+foundBedFile=paste(parentdir, "/", donorID, ".found.bed", sep="")
+notFoundBedFile=paste(parentdir, "/", donorID, ".notFound.bed", sep="")
 print(head(foundBed))
 print("foundBedFile")
 print(foundBedFile)

@@ -1,20 +1,33 @@
 #!/bin/bash
 #$ -cwd 
 
+##########################################################################                                                                   
+# Allysia Mak                                                            #                                                                   
+# platypus.sh runs Opposum for read preprocessing before running         #                                                                   
+# Platypus on all bams in the 'parentdir'                                #                                                                   
+#                                                                        #                                                                   
+# The number of bams run in parallel is specified by 'numJobs'           #                                                                   
+# Input to stdin: $1 = number of processes                               #                                                                    
+# Change lines 17-27 to fit your file structures                         #                                                                    
+#                                                                        #                                                                    
+# !! Make sure there is only 1 '*.bam' file per sample, if more than one #                                                                    
+#    then change first for loop to find -name '*your.bam'                #                                                                   
+##########################################################################
 
 #outputs concatenated vardict file for now and corresponding vcf
 ## normals for gtex:
-parentdir="/scratch/jakutagawa/RNA-seq/GTEx_bams/STAR_aligned"
-#parentdir="/scratch/jakutagawa/RNA-seq/realigned_bams/tumor" 
+#parentdir="/scratch/jakutagawa/RNA-seq/GTEx_bams/STAR_aligned"
+parentdir="/scratch/jakutagawa/RNA-seq/realigned_bams/tumor/tmpRedo" 
 #parentdir="/scratch/jakutagawa/RNA-seq/realigned_bams/normal"
 hg19="/pod/pstore/groups/brookslab/reference_indices/hg19/hg19.fa"
 hs37="/pod/pstore/groups/brookslab/reference_indices/hs37/hs37d5.fa"
 cdnahg19="/pod/pstore/groups/brookslab/reference_indices/hg19/cdna/Homo_sapiens.GRCh37.75.cdna.all.fa"
 splitbeds="/scratch/amak/varCalls/VarDict/wg-beds"
-outDir="/scratch/amak/varCalls/VarDict/gtex_normals"
+outDir="/scratch/amak/varCalls/VarDict/tumor-vcfs"
+#outDir="/scratch/amak/varCalls/VarDict/gtex_normals"
 bedList=()
 maxProcesses=$1
-if [ $maxProcesses -eq 0 ]; then
+if [ "$maxProcesses" -eq 0 ]; then
     echo "Max number of processes not supplied. Defaulting to 4"
     maxProcesses=4
 fi
@@ -27,33 +40,34 @@ function maxJobs {
     done
 }
 
-
+## makes list of split bed files created by vardict's splitBed.pl 
 for bed in $(ls $splitbeds); do 
 
     bedList+=($bed)
 done
 echo ${bedList[@]}
 
-for bam in $(find $parentdir -mindepth 1 -name '*hs37d5.bam'); do
+for bam in $(find $parentdir -mindepth 1 -name '*.bam'); do
     file=$(basename $bam)
     IFS='.'
     set $file
     uid=$(echo $1)
     IFS=''
-    mkdir $outDir/$uid
+    if [ ! -d "$outDir/$uid" ]; then
+	mkdir $outDir/$uid
 
-    echo "VarDict running on " $uid
-    for bed in ${bedList[@]}; do
-	echo $bed
+	echo "VarDict running on " $uid
+	for bed in ${bedList[@]}; do
+	    echo $bed
 
-	maxJobs; nice time vardict -D -G $hs37 -f 0.01 -N $uid -b $bam -c 1 -S 2 -E 3 $splitbeds/$bed >> $outDir/$uid/$uid".out" && echo "" >> $outDir/$uid/$uid".out" &
+	    maxJobs; nice time vardict -D -G $hs37 -f 0.01 -N $uid -b $bam -c 1 -S 2 -E 3 $splitbeds/$bed >> $outDir/$uid/$uid".out" && echo "" >> $outDir/$uid/$uid".out" &
 
-
-    done
-    
-    python vardict2vcf.py $outDir/$uid/$uid".out" > $outDir/$uid/$uid".log"
-    echo $uid " complete"
-#    cat $outDir/$uid/* > $outDir/$uid/
+	
+	done >> $outDir/"vardict.log"
+	wait
+	python vardict2vcf.py $outDir/$uid/$uid".out" > $outDir/$uid/$uid".log"
+	echo $uid && echo "" >> $outDir/$uid/$uid".log"
+    fi
 done
 wait
 
